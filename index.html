@@ -1,21 +1,24 @@
 <!doctype html>
 <html>
   <head>
-         
+          <!--Bootstrap cdn-->
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-     
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
         </head>
 
-
   <body>
+        <!--container to give padding-->
        <div class="container">
-           <div class="jumbotron">      
+           <!--grey area provided by bootstrap-->
+           <div class="jumbotron">    
 
+                    <!--heading to be updated with value-->
                     <h1 class="text-center" id="counttext">Loading</h1>
+
                     <h3 class="text-center">Work left</h3>
                     <br>
+
+                    <!--Button set-->
                     <div class="text-center">
                       <div class="btn-group">
                         <button type="button" onclick="add()" class="btn btn-lg btn-primary">+</button>
@@ -26,44 +29,12 @@
                
            </div>
        </div>
-
+    <!--Firebase, jquery, bootstap scripts from cdn-->
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
-
-    <script>
-      var myDataRef = new Firebase('https://intense-torch-1227.firebaseIO.com/');
-       myDataRef.child("count").on('value', function(snapshot) {
-        var message = snapshot.val();
-        displayCount(message);
-      });
-
-      function add(){
-       myDataRef.orderByChild("count").on("child_added", function(snapshot) {
-          console.log(snapshot.val());
-          myDataRef.child('count').set(snapshot.val()+1);
-        });
-      }
-
-      function min(){
-       myDataRef.orderByChild("count").on("child_added", function(snapshot) {
-          console.log(snapshot.val());
-          if(snapshot.val()>0){
-            myDataRef.child('count').set(snapshot.val()-1);
-          }
-        });
-      }
-
-      function reset(){
-        myDataRef.set({count: 0});
-      }
-
-      function displayCount(counterval) {
-        var textcounter = document.getElementById('counttext');
-        textcounter.innerHTML=counterval;
-      }
-
-    </script>
+     <!--our script-->
+     <script src='script.js'></script>
   </body>
 </html>
